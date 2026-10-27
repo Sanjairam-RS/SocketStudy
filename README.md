@@ -38,10 +38,34 @@ To perform a study on Socket Programming
 •	Once a connection is establi
 •	shed, servers can send and receive data using send() and recv().
 
+~~~
+import socket
+s=socket.socket() 
+s.connect(('localhost',5000))
+print(s.getsockname())
+print(s.recv(1024).decode()) 
+s.send("acknowledgement recived from the server".encode())
+~~~
+
 ## Client –Server Operations
 
 Clients create a socket using socket() and connect to a server using connect().
 After establishing a connection, clients can send and receive data using send() and recv().
+~~~
+import socket 
+from datetime import datetime
+client = socket.socket()
+client.bind(("localhost", 5000))
+client.listen(5)
+c , addr = client.accept()
+print("Client Address : ",addr)
+now = datetime.now()
+c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode()) 
+ack=c.recv(1024).decode() 
+if ack:
+     print(ack) 
+     c.close()
+~~~
 
 ## Use Cases of Socket Programming:
 Socket programming finds applications in various domains, including web development, file transfer protocols, online gaming, and real-time communication. It is the foundation for protocols like HTTP, FTP, and SMTP, which power the internet. Socket programming enables the development of both server and client applications, facilitating the exchange of information between devices in a networked environment.
@@ -55,4 +79,8 @@ Socket programming finds applications in various domains, including web developm
 
 
 ## Result:
+<img width="1920" height="1080" alt="Screenshot from 2026-10-26 16-20-50" src="https://github.com/user-attachments/assets/31f63bd6-b141-4691-b3f9-13a8097fca44" />
+
+
+
 Thus the study of Socket Programming Completed Successfully
